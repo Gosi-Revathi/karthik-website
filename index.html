@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<title>Happy 21st Birthday, Gosi Karthik 🎬</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Bebas+Neue&family=DM+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet" crossorigin="anonymous"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#000;--deep:#04080f;--panel:#080d15;--card:#0c1220;
+  --sky:#38bdf8;--skylt:#7dd3fc;--skydim:#0ea5e9;
+  --white:#f8fafc;--muted:#475569;--dim:#64748b;--dimtext:#94a3b8;
+  --gold:#d4af37;--red:#e11d48;
+}
+html{}
+body{background:var(--black);color:var(--white);font-family:"DM Sans",sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+
+/* PROGRESS */
+#prog{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--sky),var(--skylt));z-index:99999;box-shadow:0 0 8px var(--sky)}
+
+/* CURSOR */
+#cur{position:fixed;width:8px;height:8px;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:background .3s}
+#curR{position:fixed;width:28px;height:28px;border:1px solid rgba(56,189,248,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease,border-color .3s}
+.cur-t{position:fixed;border-radius:50%;background:var(--sky);pointer-events:none;z-index:9997;transform:translate(-50%,-50%)}
+
+/* PARTICLES */
+#pCvs{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.4}
+#cCvs{position:fixed;inset:0;pointer-events:none;z-index:9990}
+
+/* NETFLIX INTRO */
+#netflix{position:fixed;inset:0;z-index:999999;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;transition:opacity .7s ease}
+#netflix.out{opacity:0;pointer-events:none}
+.nf-logo{font-family:"Bebas Neue",sans-serif;font-size:clamp(4rem,18vw,10rem);color:var(--sky);letter-spacing:-.02em;text-shadow:0 0 60px rgba(56,189,248,.7),0 0 120px rgba(56,189,248,.3);opacity:0;animation:nfLogo 1s .3s ease forwards}
+@keyframes nfLogo{0%{opacity:0;transform:scale(1.5)}60%{opacity:1;transform:scale(.97)}100%{opacity:1;transform:scale(1)}}
+.nf-sub{font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--dimtext);opacity:0;animation:nfSub .6s 1s ease forwards}
+@keyframes nfSub{to{opacity:1}}
+.nf-bar{width:0;height:1px;background:var(--sky);box-shadow:0 0 6px var(--sky);animation:nfBar 1.5s 1.2s ease forwards}
+@keyframes nfBar{to{width:min(300px,60vw)}}
+
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:99998;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;opacity:1}
+.ld-line{width:1px;height:70px;background:linear-gradient(var(--sky),transparent);animation:ldLine 1.5s ease-in-out infinite}
+@keyframes ldLine{0%,100%{transform:scaleY(.2);opacity:.3}50%{transform:scaleY(1);opacity:1}}
+.ld-text{font-family:"Cormorant Garamond",serif;font-size:clamp(1rem,3vw,1.35rem);font-style:italic;color:rgba(255,255,255,.7);letter-spacing:.1em;text-align:center;min-height:2em;padding:0 2rem}
+.ld-text .hl{color:var(--sky)}
+.ld-sub{font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--dim);animation:ldFade 2s ease-in-out infinite}
+@keyframes ldFade{0%,100%{opacity:.3}50%{opacity:1}}
+.ld-bar{width:min(200px,50vw);height:1px;background:rgba(56,189,248,.15)}
+.ld-fill{height:100%;width:0%;background:var(--sky);box-shadow:0 0 8px var(--sky);transition:width .08s linear}
+
+/* NAV */
+nav{position:fixed;top:1.2rem;left:50%;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:.15rem;background:rgba(4,8,15,.88);border:1px solid rgba(56,189,248,.12);backdrop-filter:blur(16px);padding:.45rem .9rem;border-radius:999px;white-space:nowrap;max-width:calc(100vw - 2rem);overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:.2rem .4rem;transition:color .3s;flex-shrink:0}
+nav a:hover,nav a.active{color:var(--sky)}
+
+/* MUSIC */
+#musicBar{position:fixed;top:1.2rem;right:1rem;z-index:1000;display:flex;align-items:center;gap:.5rem;background:rgba(4,8,15,.88);border:1px solid rgba(56,189,248,.18);backdrop-filter:blur(16px);padding:.45rem .9rem;border-radius:999px;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dimtext);cursor:none;transition:border-color .3s}
+#musicBar:hover{border-color:var(--sky);color:var(--sky)}
+.mbars{display:flex;align-items:flex-end;gap:2px;height:12px}
+.mbars span{width:3px;background:var(--sky);border-radius:2px;animation:mb .8s ease-in-out infinite}
+.mbars span:nth-child(1){height:5px}.mbars span:nth-child(2){animation-delay:.15s;height:9px}
+.mbars span:nth-child(3){animation-delay:.3s;height:12px}.mbars span:nth-child(4){animation-delay:.45s;height:7px}
+@keyframes mb{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+#musicBar.paused .mbars span{animation:none;height:3px}
+
+/* EPISODE TRANSITION */
+#epCard{position:fixed;inset:0;z-index:99990;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;pointer-events:none;opacity:0}
+#epCard.active{animation:epAnim 2.8s ease forwards}
+@keyframes epAnim{0%{opacity:0}10%{opacity:1}68%{opacity:1}100%{opacity:0}}
+.epc-bar{width:0;height:1px;background:var(--sky);box-shadow:0 0 8px var(--sky)}
+#epCard.active .epc-bar{animation:epcBar 1s .25s ease forwards}
+@keyframes epcBar{to{width:min(280px,55vw)}}
+.epc-num{font-family:"Bebas Neue",sans-serif;font-size:.75rem;letter-spacing:.4em;color:var(--sky);opacity:0}
+#epCard.active .epc-num{animation:epcFd .5s .2s ease forwards}
+.epc-title{font-family:"Cormorant Garamond",serif;font-size:clamp(1.8rem,5vw,4rem);font-weight:700;color:#fff;text-align:center;padding:0 1.5rem;opacity:0;line-height:1.2}
+#epCard.active .epc-title{animation:epcFd .6s .35s ease forwards}
+.epc-sub{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dimtext);opacity:0}
+#epCard.active .epc-sub{animation:epcFd .5s .5s ease forwards}
+@keyframes epcFd{to{opacity:1}}
+
+/* SECTIONS */
+section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 1.5rem 7rem;position:relative;overflow:hidden}
+section::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0px,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px);pointer-events:none;z-index:0}
+
+/* NEXT EPISODE */
+.next-ep{background:none;border:none;padding:0;font:inherit;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.6rem;cursor:none;z-index:10;position:relative;margin-top:2.5rem;animation:nextP 2.5s ease-in-out infinite}
+@keyframes nextP{0%,100%{opacity:.7;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
+.nep-label{font-size:.56rem;letter-spacing:.25em;text-transform:uppercase;color:var(--sky)}
+.nep-show{font-family:"Cormorant Garamond",serif;font-size:clamp(.88rem,2.5vw,1.05rem);font-style:italic;color:rgba(255,255,255,.7);letter-spacing:.04em}
+.nep-arrow{width:34px;height:34px;border:1px solid rgba(56,189,248,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sky);font-size:.85rem;transition:background .3s,border-color .3s,box-shadow .3s}
+.next-ep:hover .nep-arrow{background:rgba(56,189,248,.12);border-color:var(--sky);box-shadow:0 0 16px rgba(56,189,248,.25)}
+
+/* HERO */
+#hero{background:radial-gradient(ellipse at 50% 20%,#001525 0%,#000 65%);text-align:center}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(56,189,248,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.04) 1px,transparent 1px);background-size:55px 55px;animation:gridD 28s linear infinite}
+@keyframes gridD{from{background-position:0 0}to{background-position:55px 55px}}
+.hero-glow{position:absolute;width:min(700px,100vw);height:min(700px,100vw);background:radial-gradient(circle,rgba(56,189,248,.09) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-55%);animation:glowP 5s ease-in-out infinite;pointer-events:none}
+@keyframes glowP{0%,100%{opacity:.5;transform:translate(-50%,-55%) scale(1)}50%{opacity:1;transform:translate(-50%,-55%) scale(1.12)}}
+.hero-yr{font-family:"Bebas Neue",sans-serif;font-size:clamp(7rem,22vw,18rem);line-height:.85;color:transparent;-webkit-text-stroke:1px rgba(56,189,248,.08);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0;user-select:none}
+.hero-tag{display:inline-block;border:1px solid rgba(56,189,248,.3);color:var(--sky);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;padding:.4rem 1.2rem;border-radius:999px;margin-bottom:1.5rem;position:relative;z-index:2;opacity:0;animation:fadeUp 1s .2s ease forwards}
+.hero-h1{font-family:"Cormorant Garamond",serif;font-size:clamp(2.2rem,6vw,5rem);font-weight:600;line-height:1.1;color:#fff;position:relative;z-index:2;margin-bottom:.5rem;opacity:0;animation:fadeUp 1s .4s ease forwards}
+.hero-h1 .nm{color:var(--sky)}
+.hero-sub{font-size:clamp(.8rem,2.5vw,1rem);color:var(--skylt);letter-spacing:.06em;font-weight:300;font-style:italic;font-family:"Cormorant Garamond",serif;position:relative;z-index:2;margin-bottom:1.5rem;opacity:0;animation:fadeUp 1s .6s ease forwards}
+/* STAT COUNTERS */
+.hero-stats{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;margin-bottom:1.5rem;opacity:0;animation:fadeUp 1s .7s ease forwards}
+.stat-item{text-align:center}
+.stat-num{font-family:"Bebas Neue",sans-serif;font-size:clamp(2rem,6vw,3.5rem);color:var(--sky);line-height:1;letter-spacing:.04em}
+.stat-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dimtext);margin-top:.2rem}
+.hero-quote{position:relative;z-index:2;max-width:min(640px,90vw);margin-top:1.5rem;padding:1.25rem 1.75rem;border-left:2px solid var(--sky);background:rgba(56,189,248,.04);font-family:"Cormorant Garamond",serif;font-size:clamp(.9rem,2.5vw,1.1rem);font-style:italic;line-height:1.9;color:rgba(255,255,255,.72);opacity:0;animation:fadeUp 1s 1s ease forwards}
+.hero-quote span{color:var(--sky)}
+.tw-cursor{display:inline-block;width:2px;height:.9em;background:var(--sky);margin-left:2px;vertical-align:text-bottom;animation:blink .8s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* SHARED */
+.eyebrow{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--sky);margin-bottom:.6rem;display:flex;align-items:center;gap:.7rem;position:relative;z-index:2}
+.eyebrow::before{content:"";width:20px;height:1px;background:var(--sky)}
+.sec-h2{font-family:"Cormorant Garamond",serif;font-size:clamp(1.8rem,5vw,3.5rem);font-weight:600;line-height:1.1;color:var(--white);margin-bottom:.8rem;position:relative;z-index:2;text-align:center}
+.sec-h2 em{color:var(--sky);font-style:italic}
+.sec-p{font-size:.93rem;line-height:1.9;color:var(--dimtext);max-width:min(580px,90vw);text-align:center;position:relative;z-index:2;margin-bottom:1.5rem}
+.divider{width:44px;height:2px;background:linear-gradient(90deg,transparent,var(--sky),transparent);margin:0 auto 1.8rem;position:relative;z-index:2;box-shadow:0 0 8px var(--sky)}
+
+/* DOSSIER */
+#dossier{background:radial-gradient(ellipse at 30% 50%,#080808 0%,#000 70%)}
+.dos-wrap{position:relative;z-index:2;width:min(800px,95vw);border:1px solid rgba(56,189,248,.2);background:rgba(8,13,21,.92);overflow:hidden;box-shadow:0 0 60px rgba(56,189,248,.05)}
+.dos-hdr{background:rgba(56,189,248,.07);border-bottom:1px solid rgba(56,189,248,.15);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.dos-hdr .stamp{font-family:"Bebas Neue",sans-serif;font-size:.72rem;letter-spacing:.3em;color:var(--sky);opacity:.7}
+.dos-hdr .cls{font-family:"Bebas Neue",sans-serif;font-size:.68rem;letter-spacing:.2em;color:var(--red);border:1px solid var(--red);padding:.2rem .6rem;opacity:.8}
+.dos-body{display:grid;grid-template-columns:190px 1fr}
+@media(max-width:580px){.dos-body{grid-template-columns:1fr}}
+.dos-photo-col{background:var(--panel);border-right:1px solid rgba(56,189,248,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.75rem 1rem;gap:.9rem;min-height:260px}
+.dos-frame{width:130px;height:170px;border:1px solid rgba(56,189,248,.3);position:relative;overflow:hidden;background:var(--card);flex-shrink:0}
+.dos-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:sepia(.15) contrast(1.08) brightness(.95)}
+/* cinematic vignette on dossier photo */
+.dos-frame::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.55) 100%);pointer-events:none}
+.dos-corner{position:absolute;width:12px;height:12px;border-color:var(--sky);border-style:solid}
+.dos-corner.tl{top:-1px;left:-1px;border-width:2px 0 0 2px}.dos-corner.br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+.dos-codename{font-family:"Bebas Neue",sans-serif;font-size:.68rem;letter-spacing:.2em;color:var(--sky);text-align:center}
+.dos-id{font-size:.56rem;color:var(--dim);letter-spacing:.1em;text-align:center}
+.dos-info{padding:1.4rem}
+.dos-name{font-family:"Bebas Neue",sans-serif;font-size:clamp(1.4rem,4vw,2.1rem);letter-spacing:.08em;color:#fff;margin-bottom:.9rem;line-height:1}
+.dos-name span{color:var(--sky)}
+.dos-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:1.1rem}
+@media(max-width:380px){.dos-grid{grid-template-columns:1fr}}
+.dos-field{background:rgba(56,189,248,.035);border:1px solid rgba(56,189,248,.08);padding:.55rem .7rem;border-radius:2px}
+.dos-field label{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:.18rem}
+.dos-field span{font-size:.78rem;color:var(--white)}
+.dos-skills label{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:.55rem}
+.sk-bar{margin-bottom:.45rem}
+.sk-name{display:flex;justify-content:space-between;font-size:.75rem;color:var(--dimtext);margin-bottom:.22rem}
+.sk-track{height:3px;background:rgba(56,189,248,.1);border-radius:2px;overflow:hidden}
+.sk-fill{height:100%;background:linear-gradient(90deg,var(--sky),var(--skylt));border-radius:2px;width:0;transition:width 1.2s ease}
+.dos-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+.dos-tag{background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.18);color:var(--sky);font-size:.56rem;letter-spacing:.1em;padding:.18rem .55rem;border-radius:2px}
+.dos-threat{background:rgba(225,29,72,.05);border:1px solid rgba(225,29,72,.18);padding:.55rem .7rem;border-radius:2px;margin-top:.7rem}
+.dos-threat label{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:.18rem}
+.dos-threat span{font-size:.76rem;color:rgba(255,255,255,.78)}
+
+/* EPISODE TIMELINE */
+#timeline{background:var(--deep)}
+.ep-tl{position:relative;z-index:2;width:min(720px,92vw);margin-top:1.5rem}
+.ep-tl::before{content:"";position:absolute;left:54px;top:0;bottom:0;width:1px;background:linear-gradient(var(--sky),rgba(56,189,248,.08))}
+@media(max-width:480px){.ep-tl::before{left:32px}}
+.ep-item{display:flex;gap:1.1rem;padding-bottom:2.4rem;position:relative;opacity:0;transform:translateX(-18px);transition:opacity .6s ease,transform .6s ease}
+.ep-item.vis{opacity:1;transform:translateX(0)}
+.ep-left{display:flex;flex-direction:column;align-items:center;width:54px;flex-shrink:0;padding-top:.2rem}
+@media(max-width:480px){.ep-left{width:32px}}
+.ep-dot{width:10px;height:10px;border-radius:50%;background:var(--sky);box-shadow:0 0 10px var(--sky);flex-shrink:0;position:relative;z-index:2}
+.ep-yr{font-family:"Bebas Neue",sans-serif;font-size:.7rem;letter-spacing:.06em;color:var(--sky);margin-top:.35rem;text-align:center;line-height:1.2}
+.ep-content{flex:1;padding-top:.05rem}
+.ep-num-lbl{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:.18rem}
+.ep-title{font-family:"Cormorant Garamond",serif;font-size:clamp(1rem,3vw,1.4rem);font-weight:600;color:var(--white);margin-bottom:.28rem}
+.ep-desc{font-size:.8rem;color:var(--dimtext);line-height:1.75}
+.ep-badge{display:inline-block;margin-top:.35rem;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.18);color:var(--sky);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .5rem;border-radius:2px}
+
+/* FLOATING PHOTOS */
+#floating{background:radial-gradient(ellipse at 50% 50%,#001020 0%,#000 65%)}
+.float-stage{position:relative;z-index:2;width:min(800px,95vw);height:min(500px,68vw);min-height:320px}
+.fi{position:absolute;border-radius:4px;border:1px solid rgba(56,189,248,.12);overflow:hidden;cursor:none;transition:transform .4s ease,box-shadow .4s ease;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.fi:hover{transform:scale(1.07) rotate(0deg) !important;box-shadow:0 16px 48px rgba(56,189,248,.14);z-index:10}
+.fi img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;pointer-events:none;filter:brightness(.88)}
+/* vignette on floating photos */
+.fi::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.5) 100%);pointer-events:none}
+.fi:hover img{filter:brightness(1)}
+.fi-cap{position:absolute;bottom:0;left:0;right:0;padding:.4rem .5rem;background:linear-gradient(transparent,rgba(0,0,0,.7));font-size:.6rem;color:rgba(255,255,255,.75);letter-spacing:.04em;line-height:1.3;z-index:2;opacity:0;transition:opacity .3s}
+.fi:hover .fi-cap{opacity:1}
+
+/* PHOTOGRAPHER */
+#photographer{background:radial-gradient(ellipse at 50% 80%,#001a2e 0%,#000 60%)}
+.cam-btn{position:relative;z-index:2;background:none;border:1px solid rgba(56,189,248,.3);color:var(--sky);font-family:"DM Sans",sans-serif;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;padding:.55rem 1.8rem;border-radius:999px;cursor:none;margin-bottom:1.5rem;transition:background .3s,box-shadow .3s}
+.cam-btn:hover{background:rgba(56,189,248,.08);box-shadow:0 0 20px rgba(56,189,248,.2)}
+.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;width:min(840px,95vw);position:relative;z-index:2}
+.gal-item{overflow:hidden;border-radius:5px;position:relative;cursor:none;border:1px solid rgba(56,189,248,.07)}
+.gal-item:nth-child(1),.gal-item:nth-child(6){grid-column:span 2;aspect-ratio:16/9}
+.gal-item:not(:nth-child(1)):not(:nth-child(6)){aspect-ratio:4/3}
+.gal-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .5s;filter:brightness(.85) contrast(1.05)}
+/* cinematic vignette on gallery */
+.gal-item::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.45) 100%);z-index:1;pointer-events:none;transition:opacity .3s}
+.gal-item:hover::before{opacity:0}
+.gal-item:hover img{transform:scale(1.06);filter:brightness(1)}
+.gal-shine{position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(56,189,248,.1));opacity:0;transition:opacity .3s;z-index:2}
+.gal-item:hover .gal-shine{opacity:1}
+
+/* LIGHTBOX */
+#lb{position:fixed;inset:0;z-index:99000;background:rgba(0,0,0,.95);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s;cursor:none}
+#lb.open{opacity:1;visibility:visible}
+#lbImg{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:5px;border:1px solid rgba(56,189,248,.12);box-shadow:0 0 60px rgba(56,189,248,.07)}
+#lbClose{position:absolute;top:1rem;right:1.5rem;font-size:1.8rem;color:var(--sky);cursor:none;background:none;border:none;transition:transform .2s;line-height:1}
+#lbClose:hover{transform:rotate(90deg)}
+#lbPrev,#lbNext{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:1px solid rgba(56,189,248,.22);color:var(--sky);width:42px;height:42px;border-radius:50%;font-size:1rem;cursor:none;display:flex;align-items:center;justify-content:center;transition:background .3s}
+#lbPrev:hover,#lbNext:hover{background:rgba(56,189,248,.18)}
+#lbPrev{left:1rem}#lbNext{right:1rem}
+#lbCount{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);font-size:.62rem;letter-spacing:.15em;color:var(--dimtext)}
+
+/* 21 REASONS */
+#reasons{background:var(--deep)}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem;width:min(900px,95vw);position:relative;z-index:2;margin-top:1.5rem}
+.r-card{background:rgba(56,189,248,.025);border:1px solid rgba(56,189,248,.08);border-radius:7px;padding:1rem .85rem;text-align:center;cursor:none;transition:transform .25s,border-color .25s,box-shadow .25s}
+.r-card:hover{transform:scale(1.04);border-color:rgba(56,189,248,.32);box-shadow:0 8px 24px rgba(56,189,248,.08)}
+.r-num{font-family:"Bebas Neue",sans-serif;font-size:1.5rem;color:rgba(56,189,248,.14);line-height:1;margin-bottom:.22rem}
+.r-card p{font-size:.75rem;color:var(--dimtext);line-height:1.5}
+
+/* LETTER */
+#letter{background:radial-gradient(ellipse at 50% 0%,#001020 0%,#000 55%)}
+.letter-box{max-width:min(640px,92vw);width:100%;position:relative;z-index:2;padding:2.5rem 3rem;background:rgba(56,189,248,.022);border:1px solid rgba(56,189,248,.13);border-radius:3px}
+@media(max-width:500px){.letter-box{padding:1.75rem 1.2rem}}
+.letter-box::before,.letter-box::after{content:"";position:absolute;width:30px;height:30px;border-color:var(--sky);border-style:solid}
+.letter-box::before{top:-1px;left:-1px;border-width:2px 0 0 2px}.letter-box::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+.letter-hdr{font-family:"Cormorant Garamond",serif;font-size:.8rem;color:var(--sky);letter-spacing:.15em;margin-bottom:1.3rem;text-transform:uppercase}
+.letter-body{font-family:"Cormorant Garamond",serif;font-size:clamp(.93rem,2.5vw,1.1rem);line-height:2.1;color:rgba(255,255,255,.77);font-weight:300}
+.letter-body strong{color:var(--sky);font-weight:400}
+.letter-sign{margin-top:1.7rem;font-family:"Cormorant Garamond",serif;font-size:1.02rem;font-style:italic;color:var(--sky)}
+
+/* ROAST */
+#roast{background:var(--deep)}
+.roast-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:1rem;width:min(880px,95vw);position:relative;z-index:2;margin-top:1.5rem}
+.roast-card{background:rgba(56,189,248,.022);border:1px solid rgba(56,189,248,.09);border-radius:9px;padding:1.3rem;transition:transform .3s,border-color .3s}
+.roast-card:hover{transform:rotate(-1deg) scale(1.02);border-color:rgba(56,189,248,.26)}
+.ri{font-size:1.25rem;margin-bottom:.4rem}
+.roast-card p{font-size:.82rem;color:var(--dimtext);line-height:1.8;font-style:italic}
+.roast-card cite{display:block;margin-top:.38rem;font-size:.62rem;letter-spacing:.1em;color:var(--sky)}
+
+/* PLAYLIST */
+#playlist{background:radial-gradient(ellipse at 50% 50%,#001525 0%,#000 65%)}
+.pl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem;width:min(860px,95vw);position:relative;z-index:2;margin-top:1.5rem}
+.pl-card{background:rgba(56,189,248,.025);border:1px solid rgba(56,189,248,.09);border-radius:10px;padding:1.2rem;display:flex;align-items:center;gap:1rem;cursor:none;transition:transform .3s,border-color .3s,box-shadow .3s}
+.pl-card:hover{transform:translateX(4px);border-color:rgba(56,189,248,.3);box-shadow:0 6px 24px rgba(56,189,248,.07)}
+.pl-icon{width:44px;height:44px;border-radius:50%;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.pl-info{flex:1;min-width:0}
+.pl-song{font-family:"Cormorant Garamond",serif;font-size:1rem;font-weight:600;color:var(--white);margin-bottom:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-artist{font-size:.7rem;color:var(--sky);letter-spacing:.05em;margin-bottom:.2rem}
+.pl-why{font-size:.72rem;color:var(--dimtext);font-style:italic;line-height:1.4}
+.pl-link{flex-shrink:0;color:var(--sky);font-size:.65rem;letter-spacing:.1em;text-decoration:none;border:1px solid rgba(56,189,248,.25);padding:.25rem .55rem;border-radius:999px;transition:background .3s}
+.pl-link:hover{background:rgba(56,189,248,.1)}
+
+/* FUTURE */
+#future{background:radial-gradient(ellipse at 50% 50%,#00142a 0%,#000 65%)}
+.f-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;width:min(700px,95vw);background:rgba(56,189,248,.07);position:relative;z-index:2;margin-top:2rem;border:1px solid rgba(56,189,248,.07)}
+@media(max-width:500px){.f-cards{grid-template-columns:1fr}}
+.f-card{background:var(--deep);padding:1.75rem 1.2rem;text-align:center;transition:background .3s}
+.f-card:hover{background:rgba(56,189,248,.04)}
+.f-icon{font-size:1.55rem;margin-bottom:.6rem}
+.f-card h4{font-family:"Cormorant Garamond",serif;font-size:1.08rem;font-weight:600;color:var(--sky);margin-bottom:.32rem}
+.f-card p{font-size:.75rem;color:var(--dimtext);line-height:1.7}
+.ep-tag{position:relative;z-index:2;margin-top:2.5rem;font-family:"Bebas Neue",sans-serif;font-size:clamp(1.2rem,4vw,2.4rem);letter-spacing:.1em;color:rgba(56,189,248,.36);text-align:center}
+
+/* FINALE */
+#finale{background:radial-gradient(ellipse at 50% 30%,#001a2e 0%,#000 60%);text-align:center}
+.g-ring{position:absolute;border-radius:50%;border:1px solid rgba(56,189,248,.07);animation:ringP 3s ease-in-out infinite}
+.g-ring.r1{width:min(350px,80vw);height:min(350px,80vw)}.g-ring.r2{width:min(550px,130vw);height:min(550px,130vw);animation-delay:1s}.g-ring.r3{width:min(750px,170vw);height:min(750px,170vw);animation-delay:2s}
+@keyframes ringP{0%,100%{opacity:.4;transform:scale(.98)}50%{opacity:1;transform:scale(1.02)}}
+.cake{position:relative;z-index:2;font-size:clamp(3rem,10vw,5rem);animation:cakeF 3s ease-in-out infinite;display:inline-block;margin-bottom:1.1rem;filter:drop-shadow(0 0 20px rgba(56,189,248,.35))}
+@keyframes cakeF{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.finale-h2{font-family:"Cormorant Garamond",serif;font-size:clamp(1.8rem,5vw,4rem);font-weight:600;line-height:1.2;color:#fff;position:relative;z-index:2;margin-bottom:1.1rem}
+.finale-h2 span{color:var(--sky)}
+.finale-msg{max-width:min(560px,90vw);font-family:"Cormorant Garamond",serif;font-size:clamp(.93rem,2.5vw,1.12rem);line-height:2.1;color:rgba(255,255,255,.72);font-style:italic;position:relative;z-index:2;margin-bottom:2rem}
+.finale-msg strong{color:var(--sky);font-style:normal}
+.finale-btns{position:relative;z-index:2;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.finale-btn{background:none;border:1px solid var(--sky);color:var(--sky);font-family:"DM Sans",sans-serif;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;padding:.72rem 2rem;border-radius:999px;cursor:none;transition:background .3s,box-shadow .3s}
+.finale-btn:hover{background:rgba(56,189,248,.1);box-shadow:0 0 28px rgba(56,189,248,.2)}
+
+/* EASTER EGG */
+#egg{position:fixed;inset:0;z-index:999998;background:rgba(0,0,0,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
+#egg.show{opacity:1;visibility:visible}
+.egg-glow{width:min(260px,60vw);height:min(260px,60vw);border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.2) 0%,transparent 70%);position:absolute;animation:eggP 2s ease-in-out infinite}
+@keyframes eggP{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+.egg-inner{position:relative;z-index:2}
+.egg-un{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--sky);margin-bottom:.8rem}
+.egg-title{font-family:"Cormorant Garamond",serif;font-size:clamp(1.8rem,5vw,3.5rem);font-weight:700;color:#fff;margin-bottom:.8rem}
+.egg-title span{color:var(--sky)}
+.egg-msg{font-family:"Cormorant Garamond",serif;font-size:clamp(.93rem,2.5vw,1.18rem);font-style:italic;line-height:2;color:rgba(255,255,255,.8);max-width:min(480px,85vw);margin:0 auto 1.8rem}
+.egg-msg span{color:var(--sky)}
+.egg-cls{background:none;border:1px solid rgba(56,189,248,.35);color:var(--sky);font-family:"DM Sans",sans-serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;padding:.52rem 1.8rem;border-radius:999px;cursor:none;transition:background .3s}
+.egg-cls:hover{background:rgba(56,189,248,.1)}
+.egg-hint{position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%);font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.1);z-index:5;pointer-events:none;white-space:nowrap}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* FOOTER */
+footer{text-align:center;padding:2rem;border-top:1px solid rgba(56,189,248,.07);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+footer span{color:var(--sky)}
+
+/* MOBILE */
+@media(max-width:480px){
+  section{padding:4.5rem 1rem 6.5rem}
+  .gal-grid{grid-template-columns:1fr 1fr}
+  .gal-item:nth-child(1),.gal-item:nth-child(6){grid-column:span 2;aspect-ratio:16/9}
+  .dos-body{grid-template-columns:1fr}
+  .dos-photo-col{border-right:none;border-bottom:1px solid rgba(56,189,248,.1)}
+  .f-cards{grid-template-columns:1fr}
+  .hero-stats{gap:1.2rem}
+  .float-stage{height:min(420px,90vw)}
+}
+</style>
+<script src="images.js"></script>
+</head>
+<body>
+
+<canvas id="pCvs"></canvas>
+<canvas id="cCvs"></canvas>
+<div id="prog"></div>
+<div id="cur"></div><div id="curR"></div>
+
+<!-- NETFLIX -->
+<div id="netflix">
+  <div class="nf-logo">GK</div>
+  <div class="nf-sub">Original Series</div>
+  <div class="nf-bar"></div>
+</div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-line"></div>
+  <div class="ld-text" id="ldTxt"></div>
+  <div class="ld-bar"><div class="ld-fill" id="ldFill"></div></div>
+  <div class="ld-sub">A Story 21 Years in the Making</div>
+</div>
+
+<!-- EPISODE CARD -->
+<div id="epCard">
+  <div class="epc-bar"></div>
+  <div class="epc-num" id="epcNum">Episode 01</div>
+  <div class="epc-title" id="epcTitle">Loading...</div>
+  <div class="epc-sub">Next Episode</div>
+</div>
+
+<!-- EASTER EGG -->
+<div id="egg">
+  <div class="egg-glow"></div>
+  <div class="egg-inner">
+    <div class="egg-un">✦ Secret Unlocked ✦</div>
+    <div class="egg-title">You Found It, <span>Karthik!</span> 🎉</div>
+    <div class="egg-msg">You typed your own name like the main character you are.<br>This secret was hidden just for you — because <span>you always find what others miss.</span><br>Happy 21st, brother. ❤️</div>
+    <button class="egg-cls" onclick="closeEgg()">Close Secret</button>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button id="lbClose" onclick="closeLb()">✕</button>
+  <button id="lbPrev" onclick="lbNav(-1)">&#8592;</button>
+  <img id="lbImg" src="" alt=""/>
+  <button id="lbNext" onclick="lbNav(1)">&#8594;</button>
+  <div id="lbCount"></div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#hero">Intro</a>
+  <a href="#dossier">Dossier</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#floating">Photos</a>
+  <a href="#photographer">Lens</a>
+  <a href="#reasons">21 Reasons</a>
+  <a href="#letter">Letter</a>
+  <a href="#roast">Roast</a>
+  <a href="#playlist">Playlist</a>
+  <a href="#future">Future</a>
+  <a href="#finale">Finale</a>
+</nav>
+
+<!-- MUSIC -->
+<div id="musicBar" class="paused" onclick="toggleMusic()">
+  <div class="mbars"><span></span><span></span><span></span><span></span></div>
+  <span id="mlbl">Ambient Off</span>
+</div>
+
+<div class="egg-hint">Secret: type K·A·R·T·H·I·K</div>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-grid"></div><div class="hero-glow"></div>
+  <div class="hero-yr">21</div>
+  <div class="hero-tag">A Cinematic Birthday Story</div>
+  <h1 class="hero-h1">Happy 21st Birthday,<br><span class="nm">Gosi Karthik</span></h1>
+  <p class="hero-sub">The Hero · The Editor · The Photographer · The Dreamer</p>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-num" data-target="21" id="s1">0</div><div class="stat-label">Years</div></div>
+    <div class="stat-item"><div class="stat-num" data-target="7700" id="s2">0</div><div class="stat-label">Days</div></div>
+    <div class="stat-item"><div class="stat-num" data-target="252" id="s3">0</div><div class="stat-label">Months</div></div>
+    <div class="stat-item"><div class="stat-num" data-target="99" id="s4">0</div><div class="stat-label">Hearts Stolen</div></div>
+  </div>
+  <div class="hero-quote"><span id="tw"></span><span class="tw-cursor" id="twC"></span></div>
+  <button class="next-ep" data-ep="Episode 01" data-title="The Dossier" data-target="dossier" onclick="handleEp(this)"><div class="nep-label">Next Episode</div><div class="nep-show">The Dossier — Who is Karthik?</div><div class="nep-arrow">↓</div></button>
+</section>
+
+<!-- ══ DOSSIER ══ -->
+<section id="dossier">
+  <div class="eyebrow reveal">Classified File</div>
+  <h2 class="sec-h2 reveal">Mafia <em>Dossier</em></h2>
+  <div class="divider reveal"></div>
+  <div class="dos-wrap reveal" id="dosWrap">
+    <div class="dos-hdr">
+      <span class="stamp">FILE NO. GK-2005-21 &nbsp;·&nbsp; DOB: 09/05/2005 &nbsp;·&nbsp; HOSPET, KARNATAKA</span>
+      <span class="cls">TOP SECRET</span>
+    </div>
+    <div class="dos-body">
+      <div class="dos-photo-col">
+        <div class="dos-frame">
+          <img id="dosImg" src="" alt="Karthik"/>
+          <div class="dos-corner tl"></div><div class="dos-corner br"></div>
+        </div>
+        <div class="dos-codename">CODENAME: KARTHIK</div>
+        <div class="dos-id">ID: GK-21-ACTIVE · 2026</div>
+      </div>
+      <div class="dos-info">
+        <div class="dos-name">GOSI <span>KARTHIK</span></div>
+        <div class="dos-grid">
+          <div class="dos-field"><label>Date of Birth</label><span>09 May 2005</span></div>
+          <div class="dos-field"><label>Hometown</label><span>Hospet, Karnataka</span></div>
+          <div class="dos-field"><label>Status</label><span>🟢 Active &amp; Dangerous</span></div>
+          <div class="dos-field"><label>Age (2026)</label><span>21 Years</span></div>
+          <div class="dos-field"><label>Signature Drama</label><span>Vincenzo 🖤</span></div>
+          <div class="dos-field"><label>Known Weakness</label><span>K-Drama finales &amp; Neha Kakkar</span></div>
+          <div class="dos-field"><label>Last Seen</label><span>Editing at midnight, Hospet</span></div>
+          <div class="dos-field"><label>Threat Level</label><span style="color:var(--red)">⬛⬛⬛⬛⬜ Maximum</span></div>
+        </div>
+        <div class="dos-skills">
+          <label>Skill Assessment</label>
+          <div class="sk-bar"><div class="sk-name"><span>Video Editing</span><span>97%</span></div><div class="sk-track"><div class="sk-fill" data-w="97"></div></div></div>
+          <div class="sk-bar"><div class="sk-name"><span>Photography</span><span>93%</span></div><div class="sk-track"><div class="sk-fill" data-w="93"></div></div></div>
+          <div class="sk-bar"><div class="sk-name"><span>K-Drama Knowledge</span><span>100%</span></div><div class="sk-track"><div class="sk-fill" data-w="100"></div></div></div>
+          <div class="sk-bar"><div class="sk-name"><span>Stealing Hearts</span><span>99%</span></div><div class="sk-track"><div class="sk-fill" data-w="99"></div></div></div>
+        </div>
+        <div class="dos-tags">
+          <span class="dos-tag">Creative</span><span class="dos-tag">Vincenzo Fan</span>
+          <span class="dos-tag">Night Owl</span><span class="dos-tag">Cinematic Eye</span>
+          <span class="dos-tag">Hospet Pride</span><span class="dos-tag">Main Character</span>
+        </div>
+        <div class="dos-threat"><label>Intelligence Report</label><span>Subject has been observed crying over Vincenzo at 3 AM and calling it "research." Listens to Neha Kakkar unironically and with full passion. Approach with caution — will recommend K-dramas unprovoked.</span></div>
+      </div>
+    </div>
+  </div>
+  <button class="next-ep" data-ep="Episode 02" data-title="The Timeline" data-target="timeline" onclick="handleEp(this)"><div class="nep-label">Next Episode</div><div class="nep-show">The Timeline — His Life Story</div><div class="nep-arrow">↓</div></button>
+</section>
+
+<!-- ══ TIMELINE ══ -->
+<section id="timeline">
+  <div class="eyebrow reveal">K-Drama Timeline</div>
+  <h2 class="sec-h2 reveal">The Story of <em>Karthik</em></h2>
+  <div class="divider reveal"></div>
+  <div class="ep-tl reveal" id="epTl">
+    <div class="ep-item"><div class="ep-left"><div class="ep-dot"></div><div class="ep-yr">2005</div></div><div class="ep-content"><div class="ep-num-lbl">Episode 01 — Pilot</div><div class="ep-title">The Hero Arrives</div><div class="ep-desc">On 9th May 2005, a new main character enters the world in Hospet. Nobody knew then how much this one person would change everything around him. The story begins.</div><span class="ep-badge">Season 1 · Hospet, Karnataka</span></div></div>
+    <div class="ep-item"><div class="ep-left"><div class="ep-dot"></div><div class="ep-yr">2008</div></div><div class="ep-content"><div class="ep-num-lbl">Episode 02 — The Mischief Arc</div><div class="ep-title">The Little Troublemaker</div><div class="ep-desc">Young Karthik discovers his greatest power — the smile that gets him out of everything. Chaos follows wherever he goes, but nobody can stay mad for long.</div><span class="ep-badge">Season 1</span></div></div>
+    <div class="ep-item"><div class="ep-left"><div class="ep-dot"></div><div class="ep-yr">2012</div></div><div class="ep-content"><div class="ep-num-lbl">Episode 03 — The Discovery</div><div class="ep-title">A Camera Changes Everything</div><div class="ep-desc">First encounter with a camera. Something clicks — literally and metaphorically. The photographer inside awakens for the very first time.</div><span class="ep-badge">Season 2</span></div></div>
+    <div class="ep-item"><div class="ep-left"><div class="ep-dot"></div><div class="ep-yr">2016</div></div><div class="ep-content"><div class="ep-num-lbl">Episode 04 — The Creative Awakening</div><div class="ep-title">The Editor is Born</div><div class="ep-desc">First video edit. Shaky footage, basic software, and an instinct that would one day become a signature style. The creative genius in Hospet emerges.</div><span class="ep-badge">Season 3</span></div></div>
+    <div class="ep-item"><div class="ep-left"><div class="ep-dot"></div><div class="ep-yr">2019</div></div><div class="ep-content"><div class="ep-num-lbl">Episode 05 — The Obsession Arc</div><div class="ep-title">Vincenzo Enters the Chat</div><div class="ep-desc">One K-drama. Then Vincenzo. Then 47 more. Sleep becomes optional. Korean storytelling bleeds into every edit, every photograph. Neha Kakkar plays in the background.</div><span class="ep-badge">Season 3</span></div></div>
+    <div class="ep-item"><div class="ep-left"><div class="ep-dot"></div><div class="ep-yr">2022</div></div><div class="ep-content"><div class="ep-num-lbl">Episode 06 — The Signature</div><div class="ep-title">A Style is Born</div><div class="ep-desc">Unmistakably his own. Cinematic color grades, dramatic pacing, frames that tell stories without words. Hospet has never seen anything like it.</div><span class="ep-badge">Season 4</span></div></div>
+    <div class="ep-item"><div class="ep-left"><div class="ep-dot"></div><div class="ep-yr">2026</div></div><div class="ep-content"><div class="ep-num-lbl">Episode 07 — Season Finale</div><div class="ep-title">21 &amp; Just Getting Started</div><div class="ep-desc">The milestone episode. 21 years of growing, learning, creating, and becoming. But this is not the finale — it is just the end of Act One. The best is yet to come.</div><span class="ep-badge">Season Finale · Age 21</span></div></div>
+  </div>
+  <button class="next-ep" data-ep="Episode 03" data-title="The Memories" data-target="floating" onclick="handleEp(this)"><div class="nep-label">Next Episode</div><div class="nep-show">The Memories — His Photo Gallery</div><div class="nep-arrow">↓</div></button>
+</section>
+
+<!-- ══ FLOATING PHOTOS ══ -->
+<section id="floating">
+  <div class="eyebrow reveal">Photo Gallery</div>
+  <h2 class="sec-h2 reveal"><em>Memories</em> in Motion</h2>
+  <div class="divider reveal"></div>
+  <p class="sec-p reveal">21 photos, 21 years. Hover to bring them to life.</p>
+  <div class="float-stage reveal" id="floatStage"></div>
+  <button class="next-ep" data-ep="Episode 04" data-title="The Photographer" data-target="photographer" onclick="handleEp(this)"><div class="nep-label">Next Episode</div><div class="nep-show">The Photographer — Behind the Lens</div><div class="nep-arrow">↓</div></button>
+</section>
+
+<!-- ══ PHOTOGRAPHER ══ -->
+<section id="photographer">
+  <div class="eyebrow reveal">Through His Lens</div>
+  <h2 class="sec-h2 reveal">Photos Taken <em>By Karthik</em></h2>
+  <div class="divider reveal"></div>
+  <p class="sec-p reveal">These are shots captured by Karthik himself. Every frame is how he sees the world. 📸</p>
+  <button class="cam-btn reveal" onclick="camFlash()">📸 Click the Shutter</button>
+  <div class="gal-grid reveal" id="galGrid">
+        <div class="gal-item" data-idx="0"><img src="" alt="Photo 1" loading="lazy"/><div class="gal-shine"></div></div>
+        <div class="gal-item" data-idx="1"><img src="" alt="Photo 2" loading="lazy"/><div class="gal-shine"></div></div>
+        <div class="gal-item" data-idx="2"><img src="" alt="Photo 3" loading="lazy"/><div class="gal-shine"></div></div>
+        <div class="gal-item" data-idx="3"><img src="" alt="Photo 4" loading="lazy"/><div class="gal-shine"></div></div>
+        <div class="gal-item" data-idx="4"><img src="" alt="Photo 5" loading="lazy"/><div class="gal-shine"></div></div>
+        <div class="gal-item" data-idx="5"><img src="" alt="Photo 6" loading="lazy"/><div class="gal-shine"></div></div>
+        <div class="gal-item" data-idx="6"><img src="" alt="Photo 7" loading="lazy"/><div class="gal-shine"></div></div>
+  </div>
+  <button class="next-ep" data-ep="Episode 05" data-title="Why We Love Karthik" data-target="reasons" onclick="handleEp(this)"><div class="nep-label">Next Episode</div><div class="nep-show">21 Reasons — Why We Love Karthik</div><div class="nep-arrow">↓</div></button>
+</section>
+
+<!-- ══ 21 REASONS ══ -->
+<section id="reasons">
+  <div class="eyebrow reveal">21 Reasons</div>
+  <h2 class="sec-h2 reveal">Why We <em>Love</em> Karthik</h2>
+  <div class="divider reveal"></div>
+  <div class="r-grid reveal" id="rGrid"></div>
+  <button class="next-ep" data-ep="Episode 06" data-title="Words From the Heart" data-target="letter" onclick="handleEp(this)"><div class="nep-label">Next Episode</div><div class="nep-show">The Letter — Words From the Heart</div><div class="nep-arrow">↓</div></button>
+</section>
+
+<!-- ══ LETTER ══ -->
+<section id="letter">
+  <div class="eyebrow reveal">An Emotional Letter</div>
+  <h2 class="sec-h2 reveal">From <em>the Heart</em></h2>
+  <div class="divider reveal"></div>
+  <div class="letter-box reveal">
+    <div class="letter-hdr">To Karthik, with all my love</div>
+    <div class="letter-body">
+      <p>Dear Karthik,</p><br>
+      <p>Watching you grow from a mischievous little boy in Hospet into a <strong>confident young man</strong> has been one of the greatest joys of my life. Your creativity, kindness, and determination inspire everyone around you.</p><br>
+      <p>Whether you are editing a video at midnight, capturing a beautiful photograph, or getting completely lost in another <strong>Vincenzo marathon</strong>, you always bring passion to everything you do.</p><br>
+      <p>On your 21st birthday, I wish you <strong>courage to chase your dreams</strong>, strength to overcome every challenge, and happiness that lasts a lifetime.</p><br>
+      <p>Thank you for being not just my brother, but one of <strong>my favourite people in the world.</strong></p><br>
+      <p>Happy Birthday, Karthik. ❤️</p>
+    </div>
+    <div class="letter-sign">— Your sister, with all her heart 🌙</div>
+  </div>
+  <button class="next-ep" data-ep="Episode 07" data-title="The Roast" data-target="roast" onclick="handleEp(this)"><div class="nep-label">Next Episode</div><div class="nep-show">The Roast — Because We Love You</div><div class="nep-arrow">↓</div></button>
+</section>
+
+<!-- ══ ROAST ══ -->
+<section id="roast">
+  <div class="eyebrow reveal">The Roast Corner</div>
+  <h2 class="sec-h2 reveal">Funny Because <em>We Love You</em> 🔥</h2>
+  <div class="divider reveal"></div>
+  <div class="roast-grid reveal">
+    <div class="roast-card"><div class="ri">📺</div><p>"Started Vincenzo. Said just the first episode. That was 9 PM. Found him at 4 AM crying and saying it was research."</p><cite>— The entire family, Hospet</cite></div>
+    <div class="roast-card"><div class="ri">⏰</div><p>"Editing sessions start at midnight because the vibe is right. The wifi bill disagrees. The results do not."</p><cite>— The electricity meter</cite></div>
+    <div class="roast-card"><div class="ri">📸</div><p>"Takes 47 photos, edits for 3 hours, says I did not like any and posts nothing. True artist behaviour."</p><cite>— His camera storage</cite></div>
+    <div class="roast-card"><div class="ri">🎵</div><p>"Listens to Neha Kakkar at full volume with zero shame and maximum emotion. We respect the commitment."</p><cite>— Every speaker he has ever owned</cite></div>
+    <div class="roast-card"><div class="ri">😴</div><p>"Sleeps through three alarms. Vincenzo OST plays: awake in 0.3 seconds. Priorities are crystal clear."</p><cite>— Sleep science researchers</cite></div>
+    <div class="roast-card"><div class="ri">💬</div><p>"Recommends K-dramas like a lawyer. It will change your life. It always does. Unfortunately."</p><cite>— Every person he has ever met</cite></div>
+  </div>
+  <button class="next-ep" data-ep="Episode 08" data-title="His Playlist" data-target="playlist" onclick="handleEp(this)"><div class="nep-label">Next Episode</div><div class="nep-show">The Playlist — Songs That Are Him</div><div class="nep-arrow">↓</div></button>
+</section>
+
+<!-- ══ PLAYLIST ══ -->
+<section id="playlist">
+  <div class="eyebrow reveal">His Soundtrack</div>
+  <h2 class="sec-h2 reveal">Karthik's <em>Playlist</em> 🎵</h2>
+  <div class="divider reveal"></div>
+  <p class="sec-p reveal">Songs that feel like him — from Neha Kakkar hits to K-drama OSTs that fuel the midnight edits.</p>
+  <div class="pl-grid reveal">
+    <div class="pl-card"><div class="pl-icon">🎵</div><div class="pl-info"><div class="pl-song">Ik Vaari Aa</div><div class="pl-artist">Arijit Singh</div><div class="pl-why">The song he plays when he is in his feelings at 2 AM</div></div><a class="pl-link" href="https://open.spotify.com/search/Ik%20Vaari%20Aa" target="_blank">▶</a></div>
+    <div class="pl-card"><div class="pl-icon">🎵</div><div class="pl-info"><div class="pl-song">Dilbar Mere</div><div class="pl-artist">Neha Kakkar</div><div class="pl-why">Full volume, zero shame, maximum passion — that is Karthik</div></div><a class="pl-link" href="https://open.spotify.com/search/Dilbar%20Neha%20Kakkar" target="_blank">▶</a></div>
+    <div class="pl-card"><div class="pl-icon">🎵</div><div class="pl-info"><div class="pl-song">Vincenzo OST — Io Sì</div><div class="pl-artist">K-Drama Soundtrack</div><div class="pl-why">The song that plays in his head when he walks into a room</div></div><a class="pl-link" href="https://www.youtube.com/results?search_query=vincenzo+ost" target="_blank">▶</a></div>
+    <div class="pl-card"><div class="pl-icon">🎵</div><div class="pl-info"><div class="pl-song">Pachtaoge</div><div class="pl-artist">Arijit Singh ft. B Praak</div><div class="pl-why">He listened to this after every K-drama cliffhanger</div></div><a class="pl-link" href="https://open.spotify.com/search/Pachtaoge%20Arijit" target="_blank">▶</a></div>
+    <div class="pl-card"><div class="pl-icon">🎵</div><div class="pl-info"><div class="pl-song">Tum Hi Ho</div><div class="pl-artist">Arijit Singh</div><div class="pl-why">The editing background track that started it all</div></div><a class="pl-link" href="https://open.spotify.com/search/Tum%20Hi%20Ho%20Arijit" target="_blank">▶</a></div>
+    <div class="pl-card"><div class="pl-icon">🎵</div><div class="pl-info"><div class="pl-song">My Destiny</div><div class="pl-artist">Lyn — K-Drama OST</div><div class="pl-why">Because every main character deserves a theme song</div></div><a class="pl-link" href="https://www.youtube.com/results?search_query=my+destiny+lyn+kdrama" target="_blank">▶</a></div>
+  </div>
+  <button class="next-ep" data-ep="Episode 09" data-title="The Future Chapter" data-target="future" onclick="handleEp(this)"><div class="nep-label">Next Episode</div><div class="nep-show">The Future — The Best is Yet to Come</div><div class="nep-arrow">↓</div></button>
+</section>
+
+<!-- ══ FUTURE ══ -->
+<section id="future">
+  <div class="eyebrow reveal">The Future Chapter</div>
+  <h2 class="sec-h2 reveal">The Best Episodes <em>Are Still Coming</em></h2>
+  <div class="divider reveal"></div>
+  <p class="sec-p reveal">At 21, the story is just beginning. The greatest shots are still ahead.</p>
+  <div class="f-cards reveal">
+    <div class="f-card"><div class="f-icon">🎬</div><h4>The Creator</h4><p>Your edits will move hearts. Your vision will inspire generations.</p></div>
+    <div class="f-card"><div class="f-icon">📷</div><h4>The Photographer</h4><p>Your lens will capture stories the world has not seen yet.</p></div>
+    <div class="f-card"><div class="f-icon">⭐</div><h4>The Dreamer</h4><p>Every dream you hold is a chapter waiting to be written.</p></div>
+  </div>
+  <div class="ep-tag reveal">✦ The Best Episodes Are Still Coming ✦</div>
+  <button class="next-ep" data-ep="Episode 10" data-title="The Grand Finale" data-target="finale" onclick="handleEp(this)"><div class="nep-label">Next Episode</div><div class="nep-show">The Finale — Happy Birthday, Karthik</div><div class="nep-arrow">↓</div></button>
+</section>
+
+<!-- ══ FINALE ══ -->
+<section id="finale">
+  <div class="g-ring r1"></div><div class="g-ring r2"></div><div class="g-ring r3"></div>
+  <div class="cake">🎂</div>
+  <h2 class="finale-h2 reveal">Happy 21st Birthday,<br><span>Gosi Karthik</span></h2>
+  <div class="divider reveal"></div>
+  <p class="finale-msg reveal">No matter how old you become, you will always be <strong>my little brother.</strong><br>May your life be filled with <strong>happiness, success, adventure,</strong><br>and <strong>unforgettable memories.</strong><br><br>The world is lucky to have you in it. ❤️</p>
+  <div class="finale-btns reveal">
+    <button class="finale-btn" onclick="launchConfetti()">🎉 Celebrate!</button>
+  </div>
+</section>
+
+<footer>Made with ❤️ for <span>Gosi Karthik</span> — Turning 21 in Style &nbsp;✦&nbsp; Hospet · 2026</footer>
+
+<script>
+var INT_IMGS = [];
+
+var DEC_IMGS = [];
+
+var MAFIA_IMG = "";
+
+
+const CAPTIONS = ["The main character energy \ud83d\udd25", "That smile that gets away with everything \ud83d\ude0f", "Caught being iconic, as usual \u2728", "Born to be in a K-drama \ud83c\udfac", "The photographer off-duty \ud83d\udcf8", "Suit up. It is giving mafia boss \ud83d\udd76\ufe0f", "Mood: Vincenzo vibes all day \ud83d\udda4", "When the edit hits different at 2 AM \ud83c\udf19", "The look that says 'I have watched 47 dramas' \ud83d\ude02", "Our favourite human, always \ud83d\udc99", "Casual king behaviour \ud83d\udc51", "The creative genius in his element \ud83c\udfa8", "Too cool for reality, living in K-dramaland \ud83c\udf0f", "21 years of being absolutely loveable \ud83c\udf82", "The vibe? Cinematic. Always cinematic. \ud83c\udf9e\ufe0f", "This guy right here \u2014 we are lucky \ud83c\udf40", "Karthik being Karthik, no notes \ud83d\udcaf", "The editor, the photographer, the legend \ud83c\udfc6", "Side character? Never. He is always the lead \ud83c\udf1f", "Obsessed with K-dramas and we love him for it \ud83d\udcfa", "Happy 21st, Gosi Karthik \u2014 the world is yours \ud83c\udf89"];
+
+// ── NETFLIX + LOADER ──
+document.addEventListener('DOMContentLoaded', function() {
+  // sound plays after brief delay for autoplay policy
+  setTimeout(playNetflixSound, 200);
+  setTimeout(function() {
+    var nf = document.getElementById('netflix');
+    var ld = document.getElementById('loader');
+    nf.classList.add('out');
+    setTimeout(function() {
+      nf.style.display = 'none';
+      ld.style.display = 'flex';
+      startLoader();
+    }, 750);
+  }, 2400);
+});
+
+function playNetflixSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(80, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.8);
+    gain.gain.setValueAtTime(0.4, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 1.2);
+  } catch(e) {}
+}
+
+function startLoader() {
+  const el = document.getElementById('ldTxt');
+  const fill = document.getElementById('ldFill');
+  const text = `"A story 21 years in the making..."`;
+  let i = 0;
+  (function type() {
+    if (i <= text.length) {
+      const p = text.substring(0,i);
+      const si = text.indexOf('21');
+      el.innerHTML = i > si+2 ? p.substring(0,si)+'<span class="hl">'+p.substring(si)+'</span>' : p;
+      fill.style.width = Math.min(95,(i/text.length)*90)+'%';
+      i++; setTimeout(type, 48);
+    } else {
+      fill.style.width = '100%';
+      setTimeout(() => {
+        var ld = document.getElementById('loader');
+        ld.style.opacity = '0';
+        ld.style.transition = 'opacity 0.6s ease';
+        setTimeout(function() {
+          ld.style.display = 'none';
+          initAll();
+        }, 650);
+      }, 700);
+    }
+  })();
+}
+
+function initAll() {
+  try { initCursor(); } catch(e) { console.warn('cursor',e); }
+  try { initParticles(); } catch(e) { console.warn('particles',e); }
+  try { startTypewriter(); } catch(e) { console.warn('typewriter',e); }
+  try { initStats(); } catch(e) { console.warn('stats',e); }
+  try { initFloating(); } catch(e) { console.warn('floating',e); }
+  try { initGallery(); } catch(e) { console.warn('gallery',e); }
+  try { initDossier(); } catch(e) { console.warn('dossier',e); }
+  try { initEpTl(); } catch(e) { console.warn('eptl',e); }
+  try { initReveal(); } catch(e) { console.warn('reveal',e); }
+  try { initProgress(); } catch(e) { console.warn('progress',e); }
+  try { initNav(); } catch(e) { console.warn('nav',e); }
+}
+
+// ── CURSOR ──
+function initCursor() {
+  const cur = document.getElementById('cur');
+  const ring = document.getElementById('curR');
+  let mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my;
+  cur.style.background = 'var(--sky)';
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    cur.style.left=mx+'px'; cur.style.top=my+'px';
+    // change cursor color on dossier section
+    const dos = document.getElementById('dossier');
+    if(dos) {
+      const r = dos.getBoundingClientRect();
+      const onDos = my>r.top && my<r.bottom;
+      cur.style.background = onDos ? 'var(--red)' : 'var(--sky)';
+      ring.style.borderColor = onDos ? 'rgba(225,29,72,.5)' : 'rgba(56,189,248,.4)';
+    }
+  });
+  setInterval(() => {
+    rx+=(mx-rx)*.13; ry+=(my-ry)*.13;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  }, 16);
+  const trails = Array.from({length:5}, () => {
+    const d=document.createElement('div'); d.className='cur-t';
+    d.style.cssText='width:4px;height:4px;'; document.body.appendChild(d); return d;
+  });
+  let tp = Array(5).fill({x:mx,y:my});
+  setInterval(() => {
+    tp=[{x:mx,y:my},...tp.slice(0,4)];
+    trails.forEach((t,i) => {
+      t.style.left=tp[i].x+'px'; t.style.top=tp[i].y+'px';
+      t.style.opacity=(0.32-i*.06).toString();
+      t.style.transform=`translate(-50%,-50%) scale(${1-i*.15})`;
+    });
+  }, 28);
+}
+
+// ── PARTICLES ──
+function initParticles() {
+  const cvs=document.getElementById('pCvs');
+  const ctx=cvs.getContext('2d');
+  cvs.width=innerWidth; cvs.height=innerHeight;
+  const pts=Array.from({length:70},()=>({
+    x:Math.random()*cvs.width,y:Math.random()*cvs.height,
+    r:.4+Math.random()*1.3,vx:(Math.random()-.5)*.26,vy:-.07-Math.random()*.26,
+    a:.07+Math.random()*.38
+  }));
+  (function anim(){
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+    pts.forEach(p=>{
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(56,189,248,${p.a})`;ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.y<-10){p.y=cvs.height+10;p.x=Math.random()*cvs.width;}
+      if(p.x<0)p.x=cvs.width;if(p.x>cvs.width)p.x=0;
+    });
+    requestAnimationFrame(anim);
+  })();
+  window.addEventListener('resize',()=>{cvs.width=innerWidth;cvs.height=innerHeight;});
+}
+
+// ── PROGRESS ──
+function initProgress() {
+  const bar=document.getElementById('prog');
+  window.addEventListener('scroll',()=>{
+    bar.style.width=Math.min(100,(scrollY/(document.body.scrollHeight-innerHeight))*100)+'%';
+  },{passive:true});
+}
+
+// ── NAV ACTIVE ──
+function initNav() {
+  const secs=document.querySelectorAll('section[id]');
+  const links=document.querySelectorAll('nav a');
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting)
+        links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));
+    });
+  },{threshold:.4}).observe && secs.forEach(s=>{
+    new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting)
+          links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));
+      });
+    },{threshold:.4}).observe(s);
+  });
+}
+
+// ── TYPEWRITER ──
+function startTypewriter() {
+  const el=document.getElementById('tw');
+  const cur=document.getElementById('twC');
+  const text=`"Every family has a hero. Ours just happens to be obsessed with K-dramas, photography, editing, and stealing everyone's hearts." ❤️`;
+  let i=0;
+  document.head.insertAdjacentHTML('beforeend','<style>@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}</style>');
+  (function t(){ if(i<=text.length){el.textContent=text.substring(0,i++);setTimeout(t,33);} else cur.style.display='none'; })();
+}
+
+// ── STAT COUNTERS ──
+function initStats() {
+  const stats=[
+    {id:'s1',target:21,dur:1200},
+    {id:'s2',target:7700,dur:1800},
+    {id:'s3',target:252,dur:1500},
+    {id:'s4',target:99,dur:1400},
+  ];
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        stats.forEach(s=>{
+          const el=document.getElementById(s.id);
+          if(!el||el.dataset.done) return;
+          el.dataset.done='1';
+          let start=null;
+          (function step(ts){
+            if(!start)start=ts;
+            const p=Math.min((ts-start)/s.dur,1);
+            el.textContent=Math.floor(p*s.target).toLocaleString();
+            if(p<1)requestAnimationFrame(step);
+            else el.textContent=s.target.toLocaleString()+(s.id==='s4'?'+':'');
+          })(performance.now());
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:.5});
+  const hero=document.getElementById('hero');
+  if(hero) obs.observe(hero);
+}
+
+// ── DOSSIER ──
+function initDossier() {
+  document.getElementById('dosImg').src = MAFIA_IMG;
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.sk-fill').forEach(b=>{b.style.width=b.dataset.w+'%';});
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:.3});
+  const dw=document.getElementById('dosWrap');
+  if(dw) obs.observe(dw);
+}
+
+// ── EPISODE TIMELINE ──
+function initEpTl() {
+  const items=document.querySelectorAll('.ep-item');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting) setTimeout(()=>e.target.classList.add('vis'),i*120);
+    });
+  },{threshold:.2});
+  items.forEach(it=>obs.observe(it));
+}
+
+// ── FLOATING PHOTOS ──
+function initFloating() {
+  const stage=document.getElementById('floatStage');
+  if(!stage||!INT_IMGS.length) return;
+  const positions=[
+    {x:.02,y:.02,w:.32,h:.46,r:-3},{x:.36,y:.0,w:.27,h:.38,r:2},
+    {x:.66,y:.04,w:.32,h:.44,r:-2},{x:.0,y:.5,w:.3,h:.44,r:3},
+    {x:.32,y:.44,w:.35,h:.5,r:-1},{x:.68,y:.5,w:.3,h:.44,r:2},
+    {x:.1,y:.28,w:.24,h:.34,r:4},{x:.62,y:.25,w:.26,h:.36,r:-3},
+  ];
+  const style=document.createElement('style');
+  INT_IMGS.slice(0,8).forEach((src,i) => {
+    const p=positions[i];
+    const div=document.createElement('div'); div.className='fi';
+    div.style.cssText=`left:${p.x*100}%;top:${p.y*100}%;width:${p.w*100}%;height:${p.h*100}%;transform:rotate(${p.r}deg);animation:fi${i} ${4.5+i*.4}s ease-in-out ${i*.3}s infinite;`;
+    const img=document.createElement('img'); img.src=src; img.alt='Memory '+(i+1);
+    img.style.cssText='width:100%;height:100%;object-fit:cover;object-position:center top;display:block;';
+    const cap=document.createElement('div'); cap.className='fi-cap'; cap.textContent=CAPTIONS[i]||'';
+    div.appendChild(img); div.appendChild(cap);
+    div.addEventListener('click',()=>openLb(i,'int'));
+    stage.appendChild(div);
+    style.textContent+=`@keyframes fi${i}{0%,100%{transform:rotate(${p.r}deg) translateY(0)}50%{transform:rotate(${p.r+1}deg) translateY(-${5+i%4*2}px)}}`;
+  });
+  document.head.appendChild(style);
+}
+
+// ── GALLERY ──
+function initGallery() {
+  // populate gallery images from images.js
+  document.querySelectorAll('.gal-item').forEach(function(item,i) {
+    var img = item.querySelector('img');
+    if(img && DEC_IMGS[i]) img.src = DEC_IMGS[i];
+    item.addEventListener('click',function(){ openLb(i,'dec'); });
+  });
+  document.getElementById('lb').addEventListener('click',e=>{
+    if(e.target===document.getElementById('lb')) closeLb();
+  });
+}
+
+// ── LIGHTBOX ──
+let lbIdx=0,lbArr='dec';
+function openLb(i,arr) {
+  lbIdx=i; lbArr=arr;
+  const imgs=arr==='dec'?DEC_IMGS:INT_IMGS;
+  document.getElementById('lbImg').src=imgs[i];
+  document.getElementById('lbCount').textContent=(i+1)+' / '+imgs.length+(arr==='int'?' · '+CAPTIONS[i]:'');
+  document.getElementById('lb').classList.add('open');
+}
+function closeLb(){document.getElementById('lb').classList.remove('open');}
+function lbNav(dir){
+  const imgs=lbArr==='dec'?DEC_IMGS:INT_IMGS;
+  lbIdx=(lbIdx+dir+imgs.length)%imgs.length;
+  document.getElementById('lbImg').src=imgs[lbIdx];
+  document.getElementById('lbCount').textContent=(lbIdx+1)+' / '+imgs.length+(lbArr==='int'?' · '+CAPTIONS[lbIdx]:'');
+}
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('lb').classList.contains('open')){
+    if(e.key==='ArrowLeft')lbNav(-1);
+    if(e.key==='ArrowRight')lbNav(1);
+    if(e.key==='Escape')closeLb();
+  }
+});
+
+// ── 21 REASONS ──
+const reasons=["Your contagious laugh that fills every room","The way you see beauty through your camera","Your editing skills that leave everyone speechless","How passionate you are about Vincenzo and K-dramas","Your creativity that has absolutely no limits","The way you make everyone around you feel special","Your dedication to every single thing you love","That mischievous smile that gets you out of everything","How hard you work without anyone ever asking","Your kindness that comes so completely naturally","The dramatic reactions to every plot twist 😭","Your patience — except during K-drama spoilers","The way you turn ordinary moments into pure art","How you always show up when it truly matters","Your taste in music — Neha Kakkar and proud of it 🎵","The loyalty you give without a second thought","Your curiosity that never ever stops growing","How you make even boring days feel like adventures","The pride you inspire in everyone without even trying","Your resilience — you always find a way back","Simply being YOU — our one and only Karthik ❤️"];
+const rg=document.getElementById('rGrid');
+reasons.forEach((r,i)=>{
+  const c=document.createElement('div'); c.className='r-card';
+  c.innerHTML=`<div class="r-num">${String(i+1).padStart(2,'0')}</div><p>${r}</p>`;
+  rg.appendChild(c);
+});
+
+// ── REVEAL ──
+function initReveal() {
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        e.target.style.transitionDelay=(i%4)*.08+'s';
+        e.target.classList.add('vis');
+      }
+    });
+  },{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+
+// ── EPISODE TRANSITION ──
+let epBusy=false;
+function handleEp(btn) {
+  const num=btn.dataset.ep, title=btn.dataset.title, target=btn.dataset.target;
+  goEp(num,title,target);
+}
+function goEp(num,title,target) {
+  if(epBusy) return; epBusy=true;
+  const card=document.getElementById('epCard');
+  document.getElementById('epcNum').textContent=num;
+  document.getElementById('epcTitle').textContent=title;
+  card.classList.add('active');
+  setTimeout(()=>{
+    const el=document.getElementById(target);
+    if(el) { window.scrollTo({top: el.offsetTop, behavior: 'auto'}); }
+    setTimeout(()=>{card.classList.remove('active');epBusy=false;},600);
+  },1900);
+}
+
+// ── MUSIC ──
+let playing=false;
+function toggleMusic(){
+  let a=document.getElementById('bgAudio');
+  if(!a){a=document.createElement('audio');a.id='bgAudio';a.loop=true;
+    a.src='https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+    document.body.appendChild(a);}
+  const bar=document.getElementById('musicBar'),lbl=document.getElementById('mlbl');
+  if(playing){a.pause();bar.classList.add('paused');lbl.textContent='Ambient Off';}
+  else{a.volume=.2;a.play().catch(()=>{});bar.classList.remove('paused');lbl.textContent='Ambient On';}
+  playing=!playing;
+}
+
+// ── CAMERA FLASH ──
+function camFlash(){document.body.style.filter='brightness(2.5)';setTimeout(()=>document.body.style.filter='',100);}
+
+// ── CONFETTI ──
+const cCvs=document.getElementById('cCvs');
+const cCtx=cCvs.getContext('2d');
+let cPcs=[],cAf=null;
+function launchConfetti(){
+  cCvs.width=innerWidth;cCvs.height=innerHeight;cPcs=[];
+  const cols=['#38bdf8','#7dd3fc','#fff','#0ea5e9','#d4af37','#bae6fd','#f0f9ff'];
+  for(let i=0;i<220;i++)cPcs.push({
+    x:Math.random()*cCvs.width,y:-10-Math.random()*400,
+    w:4+Math.random()*9,h:3+Math.random()*6,
+    color:cols[Math.floor(Math.random()*cols.length)],
+    r:Math.random()*Math.PI*2,vx:(Math.random()-.5)*5,
+    vy:2+Math.random()*4,vr:(Math.random()-.5)*.25,a:1
+  });
+  if(cAf)cancelAnimationFrame(cAf);
+  (function draw(){
+    cCtx.clearRect(0,0,cCvs.width,cCvs.height);
+    cPcs.forEach(p=>{
+      cCtx.save();cCtx.globalAlpha=p.a;
+      cCtx.translate(p.x,p.y);cCtx.rotate(p.r);
+      cCtx.fillStyle=p.color;cCtx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      cCtx.restore();
+      p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.a-=.004;
+    });
+    cPcs=cPcs.filter(p=>p.a>0);
+    if(cPcs.length)cAf=requestAnimationFrame(draw);
+    else cCtx.clearRect(0,0,cCvs.width,cCvs.height);
+  })();
+}
+
+`,'_blank');
+}
+
+// ── EASTER EGG ──
+let typed='';
+document.addEventListener('keydown',e=>{
+  typed+=e.key.toUpperCase();
+  if(typed.length>7)typed=typed.slice(-7);
+  if(typed==='KARTHIK'){document.getElementById('egg').classList.add('show');launchConfetti();typed='';}
+});
+function closeEgg(){document.getElementById('egg').classList.remove('show');}
+</script>
+</body>
+</html>
